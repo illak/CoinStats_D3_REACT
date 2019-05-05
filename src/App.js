@@ -18,8 +18,8 @@ const StyledContainer = styled.div`
 const App = () => {
   const data = useData();
   const chartWidth = 900;
-  const chartHeight = 550;
-  const margin = { top: 10, right: 10, bottom: 70, left: 70 };
+  const chartHeight = 500;
+  const margin = { top: 10, right: 90, bottom: 70, left: 70 };
 
   return (
     <StyledContainer>

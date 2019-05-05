@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import styled from "styled-components";
 
 import useChartContext from "../hooks/useChartContext";
+import Tooltip from "./Tooltip";
 
 const StyledPath = styled.path`
   fill: none;
@@ -89,7 +90,11 @@ const Chart = ({ width, height, margin }) => {
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <StyledPath d={line(dataFiltered)} />
+        {dataFiltered.length > 0 ? (
+          <StyledPath d={line(dataFiltered)} />
+        ) : (
+          <text>No Data in Selected Range</text>
+        )}
       </g>
 
       <g
@@ -119,6 +124,16 @@ const Chart = ({ width, height, margin }) => {
           ? "Market Capitalization (USD)"
           : "24 Hour Trading Volume (USD)"}
       </text>
+
+      <Tooltip
+        x={margin.left}
+        y={margin.top}
+        width={innerWidth}
+        height={innerHeight}
+        xScale={x}
+        yScale={y}
+        dataFiltered={dataFiltered}
+      />
     </svg>
   );
 };
