@@ -12,16 +12,23 @@ const StyledPath = styled.path`
   transition: all 1s;
 `;
 
+const StyledText = styled.text`
+  text-anchor: middle;
+`;
+
 const Chart = ({ width, height, margin }) => {
   const { data, coin, value, newMinDate, newMaxDate } = useChartContext();
 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  const dataFiltered =
-    newMinDate && newMaxDate
-      ? data[coin].filter(d => d.date >= newMinDate && d.date <= newMaxDate)
-      : data[coin];
+  const dataFiltered = useMemo(
+    () =>
+      newMinDate && newMaxDate
+        ? data[coin].filter(d => d.date >= newMinDate && d.date <= newMaxDate)
+        : data[coin],
+    [newMinDate, newMaxDate, data, coin]
+  );
 
   const x = useMemo(
     () =>
@@ -93,7 +100,9 @@ const Chart = ({ width, height, margin }) => {
         {dataFiltered.length > 0 ? (
           <StyledPath d={line(dataFiltered)} />
         ) : (
-          <text>No Data in Selected Range</text>
+          <StyledText x={innerWidth / 2} y={innerHeight / 2}>
+            No Data in Selected Range
+          </StyledText>
         )}
       </g>
 
