@@ -6,7 +6,7 @@ import CustomSlider from "../utils/CustomSlider";
 
 import { timeParse, timeFormat, timeDay } from "d3";
 
-const StyledContainer = styled.div`
+const StyledMainContainer = styled.div`
   display: flex;
   height: 100px;
   justify-content: space-evenly;
@@ -21,6 +21,11 @@ const StyledSpan = styled.span`
   color: #000;
   background-color: lightsalmon;
   border-radius: 10px;
+`;
+
+const StyledDateContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Control = () => {
@@ -64,7 +69,7 @@ const Control = () => {
   };
 
   return (
-    <StyledContainer>
+    <StyledMainContainer>
       <div className="slider-container">
         <CustomSlider
           width={400}
@@ -75,10 +80,10 @@ const Control = () => {
           onChangeFun={handleSliderChange}
           onAfterChangeFun={() => {}}
         />
-        <div className="level">
+        <StyledDateContainer>
           <StyledSpan>{`${dateDisplay[0]}`}</StyledSpan>
           <StyledSpan>{`${dateDisplay[1]}`}</StyledSpan>
-        </div>
+        </StyledDateContainer>
       </div>
 
       <div className="select">
@@ -100,7 +105,7 @@ const Control = () => {
           ))}
         </select>
       </div>
-    </StyledContainer>
+    </StyledMainContainer>
   );
 };
 

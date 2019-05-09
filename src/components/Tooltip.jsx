@@ -20,12 +20,16 @@ const StyledRect = styled.rect`
   pointer-events: all;
 `;
 
+const StyledText = styled.text`
+  background: lightsalmon;
+`;
+
 const Tooltip = ({ x, y, width, height, xScale, yScale, dataFiltered }) => {
   const { value } = useChartContext();
 
   const [gX, setGx] = useState(x);
   const [gY, setGy] = useState(y);
-  const [display, setDisplay] = useState();
+  const [display, setDisplay] = useState("none");
   const [y2, setY2] = useState(height);
   const [x2, setX2] = useState(width);
   const [text, setText] = useState("");
@@ -58,9 +62,9 @@ const Tooltip = ({ x, y, width, height, xScale, yScale, dataFiltered }) => {
         <StyledLine y1={0} y2={y2} />
         <StyledLine x1={0} x2={x2} />
         <StyledCircle r={7} />
-        <text x={15} dy={".31em"}>
+        <StyledText x={15} dy={".31em"} fontWeight="bold">
           {text}
-        </text>
+        </StyledText>
       </g>
       <StyledRect
         transform={`translate(${x},${y})`}
